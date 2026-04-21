@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import SettingsPage from './pages/SettingsPage';
+import WebsiteContentPage from './pages/WebsiteContentPage';
 
 import { useAuth } from './state/auth';
 
@@ -26,6 +27,9 @@ function Shell({ children }) {
           </Link>
           <Link className="nav__link" to="/settings">
             Settings
+          </Link>
+          <Link className="nav__link" to="/website">
+            Website
           </Link>
         </nav>
 
@@ -71,6 +75,16 @@ export default function App() {
           <ProtectedRoute>
             <Shell>
               <SettingsPage />
+            </Shell>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/website"
+        element={
+          <ProtectedRoute>
+            <Shell>
+              <WebsiteContentPage />
             </Shell>
           </ProtectedRoute>
         }

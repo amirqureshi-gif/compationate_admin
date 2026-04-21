@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../state/auth';
 
 export default function DashboardPage() {
@@ -17,8 +18,8 @@ export default function DashboardPage() {
         <div className="card">
           <div className="card__title">Website content</div>
           <div className="card__body">
-            Connect this panel to your API to manage donations, members, and
-            activities.
+            Edit homepage sections, services, members, activities, and About/SOP copy from the{' '}
+            <Link to="/website">Website</Link> screen (stored in Postgres via the API).
           </div>
         </div>
         <div className="card">
