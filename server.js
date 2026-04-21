@@ -24,6 +24,13 @@ app.use(
   })
 );
 
+app.get('/env.js', (req, res) => {
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
+  res.setHeader('content-type', 'application/javascript; charset=utf-8');
+  res.setHeader('cache-control', 'no-store, max-age=0');
+  res.status(200).send(`window.__ENV__ = Object.assign(window.__ENV__ || {}, { REACT_APP_API_BASE_URL: ${JSON.stringify(apiBaseUrl)} });`);
+});
+
 app.get('*', (req, res) => {
   if (!fs.existsSync(indexHtmlPath)) {
     res
