@@ -1,30 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../state/auth';
-
-function LogoMark({ size = 44 }) {
-  return (
-    <div className="logoMark" style={{ width: size, height: size }} aria-hidden="true">
-      <svg viewBox="0 0 64 64" width={size} height={size} role="img">
-        <defs>
-          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#6ea8fe" />
-            <stop offset="1" stopColor="#a78bfa" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M32 56s-18-10.6-24.2-22.8C3.9 25.4 7.8 14.6 18.6 12c5.7-1.4 10.8.4 13.4 3.7C34.6 12.4 39.7 10.6 45.4 12 56.2 14.6 60.1 25.4 56.2 33.2 50 45.4 32 56 32 56z"
-          fill="url(#g)"
-          opacity="0.95"
-        />
-        <path
-          d="M18 34c5-1 8-4 10-9 2 5 5 8 10 9-5 1-8 4-10 9-2-5-5-8-10-9z"
-          fill="rgba(255,255,255,0.92)"
-        />
-      </svg>
-    </div>
-  );
-}
+import BrandLogo from '../components/BrandLogo';
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -55,53 +32,64 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="auth">
-      <div className="auth__card">
-        <div className="auth__brand">
-          <LogoMark />
-          <div>
-            <div className="auth__brandTitle">Compassionate Alliance</div>
-            <div className="auth__brandSub">Admin panel</div>
-          </div>
+    <div className="authPage">
+      <div className="authPage__art" aria-hidden="true">
+        <div className="authPage__artInner">
+          <BrandLogo height={80} className="authPage__mark" />
+          <h1 className="authPage__artTitle">Compassionate Alliance</h1>
+          <p className="authPage__artLead">
+            Manage public website copy, services, and member-facing content in one place—served to visitors from
+            your API and database.
+          </p>
+          <ul className="authPage__points">
+            <li>Form-based editing for all main sections</li>
+            <li>Changes saved to PostgreSQL via the Compassionate API</li>
+            <li>Same branding as the public site</li>
+          </ul>
         </div>
-        <h1 className="auth__title">Admin login</h1>
-        <p className="auth__hint">
-          Sign in to manage CompassionateAlliance website data.
-        </p>
+      </div>
 
-        {error ? <div className="alert alert--error">{error}</div> : null}
+      <div className="authPage__panel">
+        <div className="authCard">
+          <div className="authCard__kicker">Administrator access</div>
+          <h2 className="authCard__title">Sign in to continue</h2>
+          <p className="authCard__hint">Use the credentials provisioned for your Compassionate Alliance admin account.</p>
 
-        <form onSubmit={onSubmit} className="form">
-          <label className="field">
-            <span className="field__label">Email</span>
-            <input
-              className="input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-              inputMode="email"
-              required
-            />
-          </label>
+          {error ? <div className="alert alert--error">{error}</div> : null}
 
-          <label className="field">
-            <span className="field__label">Password</span>
-            <input
-              className="input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-              required
-            />
-          </label>
+          <form onSubmit={onSubmit} className="form" noValidate>
+            <label className="field">
+              <span className="field__label">Email</span>
+              <input
+                className="input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+                inputMode="email"
+                type="email"
+                required
+              />
+            </label>
 
-          <button className="btn btn--primary" disabled={submitting}>
-            {submitting ? 'Signing in…' : 'Sign in'}
-          </button>
-        </form>
+            <label className="field">
+              <span className="field__label">Password</span>
+              <input
+                className="input"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                required
+              />
+            </label>
+
+            <button className="btn btn--primary btn--block" type="submit" disabled={submitting}>
+              {submitting ? 'Signing in…' : 'Sign in'}
+            </button>
+          </form>
+        </div>
+        <p className="authPage__legal">Protected area. For authorized staff only.</p>
       </div>
     </div>
   );
 }
-
