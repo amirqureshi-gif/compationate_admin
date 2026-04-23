@@ -1,13 +1,15 @@
 :root {
   --bg: #0b1020;
-  --panel: #121a33;
-  --panel-2: #0f1730;
+  --panel: #0e1633;
+  --panel-2: #0b1228;
   --text: #e7ecff;
   --muted: rgba(231, 236, 255, 0.72);
   --border: rgba(231, 236, 255, 0.14);
   --primary: #6ea8fe;
   --danger: #ff6b6b;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.42);
+  --shadow-2: 0 8px 20px rgba(0, 0, 0, 0.35);
+  --radius: 16px;
 }
 
 * {
@@ -22,7 +24,10 @@ body {
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: radial-gradient(1200px 700px at 20% 10%, #1b2a6a 0%, var(--bg) 60%);
+  background:
+    radial-gradient(900px 520px at 18% 12%, rgba(110, 168, 254, 0.22) 0%, rgba(11, 16, 32, 0) 60%),
+    radial-gradient(900px 520px at 88% 14%, rgba(167, 139, 250, 0.18) 0%, rgba(11, 16, 32, 0) 62%),
+    radial-gradient(1200px 700px at 20% 10%, #17245a 0%, var(--bg) 60%);
   color: var(--text);
 }
 
@@ -44,6 +49,29 @@ a {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(600px 280px at 30% 0%, rgba(110, 168, 254, 0.16) 0%, rgba(0, 0, 0, 0) 70%),
+    radial-gradient(600px 280px at 70% 0%, rgba(167, 139, 250, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+  opacity: 0.9;
+}
+
+.brand {
+  position: relative;
+  z-index: 1;
+}
+
+.brand__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .brand__title {
@@ -66,8 +94,8 @@ a {
 .nav__link {
   padding: 10px 12px;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .nav__link:hover {
@@ -81,6 +109,22 @@ a {
   gap: 10px;
   padding-top: 12px;
   border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.logoMark {
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(231, 236, 255, 0.12);
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+}
+
+.logoMark--small {
+  border-radius: 12px;
 }
 
 .user__label {
@@ -127,7 +171,7 @@ a {
 .card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 14px;
   box-shadow: var(--shadow);
 }
@@ -146,7 +190,7 @@ a {
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.04);
   color: var(--text);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 10px 12px;
   cursor: pointer;
   font-weight: 600;
@@ -154,7 +198,7 @@ a {
 
 .btn--primary {
   border-color: rgba(110, 168, 254, 0.7);
-  background: rgba(110, 168, 254, 0.18);
+  background: linear-gradient(180deg, rgba(110, 168, 254, 0.22), rgba(110, 168, 254, 0.14));
 }
 
 .btn--secondary:hover,
@@ -178,9 +222,28 @@ a {
   width: min(440px, 100%);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 18px;
   box-shadow: var(--shadow);
+}
+
+.auth__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.auth__brandTitle {
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  line-height: 1.1;
+}
+
+.auth__brandSub {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 2px;
 }
 
 .auth__title {
@@ -212,7 +275,7 @@ a {
 .input {
   width: 100%;
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid var(--border);
   background: rgba(0, 0, 0, 0.22);
   color: var(--text);
@@ -221,6 +284,7 @@ a {
 
 .input:focus {
   border-color: rgba(110, 168, 254, 0.6);
+  box-shadow: 0 0 0 4px rgba(110, 168, 254, 0.12);
 }
 
 .alert {
